@@ -1,0 +1,27 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+p, h1 {
+    color: #000
+}
+
+
+.hero {
+    background: url('https://via.placeholder.com/1600x600?text=Fitness+Hero+Image') center/cover no-repeat;
+    color: white;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+footer {
+    background-color: #111;
+    color: #aaa;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 50px;
+}
