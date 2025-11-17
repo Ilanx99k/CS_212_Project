@@ -6,12 +6,13 @@
   <title>Fitness Website</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../style.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top border-bottom">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top border-bottom">
     <div class="container">
       <a class="navbar-brand fw-bold text-accent" href="#">FITNESS | WELLNESS</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,11 +21,11 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#tracker">Tracker</a></li>
           <li class="nav-item"><a class="nav-link" href="#diet">Diet</a></li>
-          <li class="nav-item"><a class="nav-link" href="exercise.html">Exercise</a></li>
-          <li class="nav-item"><a class="nav-link" href="./index.html">Sources</a></li>
+          <li class="nav-item"><a class="nav-link" href="#exercise">Exercise</a></li>
+          <li class="nav-item"><a class="nav-link" href="./sources/index.html">Sources</a></li>
         </ul>
       </div>
     </div>
@@ -34,13 +35,78 @@
     <div class="container text-center py-5">
         <h1 class="display-2 fw-bolder mb-3">ACHIEVE YOUR BEST SELF.</h1> 
         <p class="lead mb-4 text-secondary">Personalized plans, backed by science, designed for your unique body and goals.</p>
-        <a href="../index.html#tracker" class="btn btn-accent btn-lg fw-bold shadow">START YOUR PLAN TODAY</a>
+        <a href="#tracker" class="btn btn-accent btn-lg fw-bold shadow">START YOUR PLAN TODAY</a>
     </div>
   </section>
 
-  <section id="sources" class="container py-5">
-    <h2 class="text-center mb-5 fw-bold text-accent">Sources</h2>
+  <section id="tracker" class="container my-5 p-4 rounded bg-light-gray shadow-sm">
+    <h2 class="text-center mb-4 text-accent">🎯 Health Tracker</h2>
+    <p class="text-center text-muted">Input your goals and body metrics. We'll remember this info for your next visit!</p>
+    
+    <div id="welcome-message" class="alert alert-info text-center d-none"></div>
+
+    <form id="tracking-form" class="mt-4">
+      <div class="mb-3">
+        <label for="goal" class="form-label fw-bold">My Main Goal:</label>
+        <select id="goal" class="form-select">
+          <option value="" disabled selected>Select a goal...</option>
+          <option value="weight_loss">Weight Loss</option>
+          <option value="muscle_gain">Muscle Gain</option>
+          <option value="general_health">General Health</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="weight" class="form-label fw-bold">Current Weight (lbs):</label>
+        <input type="number" id="weight" class="form-control" placeholder="e.g., 150" required>
+      </div>
+      <button type="submit" class="btn btn-success-custom w-100 fw-bold">Save Progress</button>
+    </form>
+    
+    <div class="mt-3 text-center">
+        <button id="clear-data" class="btn btn-sm text-danger-custom">Clear My Saved Data</button>
+    </div>
   </section>
-  
+
+  <section id="diet" class="container py-5">
+    <h2 class="text-center mb-5 fw-bold text-accent">🍎 Fuel Your Body: Diet Plans</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-teal">
+          <div class="card-body">
+            <h3 class="card-title text-dark">Mediterranean</h3>
+            <p class="card-text">Rich in fruits, vegetables, fish, and olive oil. It is low in caloric density and high in nutrients, helping with weight loss.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-teal">
+          <div class="card-body">
+            <h3 class="card-title text-dark">Animal-Based</h3>
+            <p class="card-text">Focuses on meat, dairy, eggs, and honey, providing highly bioavailable essential nutrients like protein, iron, and B12.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-teal">
+          <div class="card-body">
+            <h3 class="card-title text-dark">Intermittent Fasting (IF)</h3>
+            <p class="card-text">A flexible approach that limits when you eat. Methods include fasting for two days a week or time-restricted eating (6-8 hours).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="exercise" class="container my-5 py-5 bg-light-gray rounded">
+    <h2 class="text-center mb-4 text-accent">💪 Exercise & Body Types</h2>
+    <p class="text-center text-secondary">This section will guide you through workout plans tailored for different body goals and types (Ectomorph, Mesomorph, Endomorph).</p>
+  </div>
+
+  <footer>
+    <p class="mb-0">&copy; 2025 FitLife. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
