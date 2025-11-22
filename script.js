@@ -1,25 +1,35 @@
 // script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('tracking-form');
-    const welcomeMessage = document.getElementById('welcome-message');
+    const planResult = document.getElementById('plan-result');
     const clearDataButton = document.getElementById('clear-data');
 
-    // Function to save data to Local Storage
+    if (!form) return;
+
+    // DOM Elements
+    const recDietTitle = document.getElementById('rec-diet-title');
+    const recDietDesc = document.getElementById('rec-diet-desc');
+    const recDietImg = document.getElementById('rec-diet-img');
+
+    const recWorkoutTitle = document.getElementById('rec-workout-title');
+    const recWorkoutDesc = document.getElementById('rec-workout-desc');
+    const recWorkoutImg = document.getElementById('rec-workout-img');
+    
+    const welcomeText = document.getElementById('welcome-text');
+
+    // Save Data
     const saveProgress = (goal, weight) => {
         const userData = {
             goal: goal,
             weight: weight,
-            timestamp: new Date().toLocaleString()
+            timestamp: new Date().toLocaleDateString()
         };
-        // Use JSON.stringify to store the object as a string
         localStorage.setItem('fitnessTrackerData', JSON.stringify(userData));
-        displayWelcomeMessage(userData);
+        displayPersonalizedPlan(userData);
     };
 
-    // Function to load data from Local Storage
+    // Load Data
     const loadProgress = () => {
-        // Use JSON.parse to convert the string back into an object
         const storedData = localStorage.getItem('fitnessTrackerData');
         if (storedData) {
             return JSON.parse(storedData);
@@ -27,38 +37,62 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     };
 
-    // Function to display the personalized welcome message and populate the form
-    const displayWelcomeMessage = (data) => {
-        if (data) {
-            // Populate form fields with stored data
-            document.getElementById('goal').value = data.goal;
-            document.getElementById('weight').value = data.weight;
-
-            // Generate the message based on the goal
-            let goalText = '';
-            switch(data.goal) {
-                case 'weight_loss':
-                    goalText = 'weight loss';
-                    break;
-                case 'muscle_gain':
-                    goalText = 'muscle gain';
-                    break;
-                case 'general_health':
-                    goalText = 'general health';
-                    break;
-            }
-
-            welcomeMessage.innerHTML = `Welcome back! Your goal is currently set for ${goalText} (Weight: ${data.weight} lbs). Last updated: ${data.timestamp}.`;
-            welcomeMessage.classList.remove('d-none');
-            form.querySelector('button[type="submit"]').textContent = 'Update Progress';
-        } else {
-            // If no data is found, show the default form state
-            welcomeMessage.classList.add('d-none');
-            form.querySelector('button[type="submit"]').textContent = 'Save Progress';
+    // Update UI with Images
+    const displayPersonalizedPlan = (data) => {
+        if (!data) {
+            planResult.classList.add('d-none');
+            return;
         }
+
+        document.getElementById('goal').value = data.goal;
+        document.getElementById('weight').value = data.weight;
+        planResult.classList.remove('d-none');
+        
+        switch(data.goal) {
+            case 'muscle_gain':
+                // MUSCLE GAIN: Animal Based + PPL
+                recDietTitle.innerText = "Animal-Based / High Protein";
+                recDietDesc.innerText = "Focus on protein-heavy foods like lean beef, eggs, and dairy to support muscle repair.";
+                // Image: Steak/Meat
+                recDietImg.src = "https://images.unsplash.com/photo-1607116176195-b81b1f41f536?q=80&w=1000&auto=format&fit=crop"; 
+                
+                recWorkoutTitle.innerText = "Push / Pull / Legs (6 Day)";
+                recWorkoutDesc.innerText = "High-frequency volume. Targets muscle groups twice a week for maximum hypertrophy.";
+                // Image: Heavy Weights/Dumbbells
+                recWorkoutImg.src = "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1000&auto=format&fit=crop";
+                break;
+
+            case 'weight_loss':
+                // WEIGHT LOSS: Mediterranean + Full Body
+                recDietTitle.innerText = "Mediterranean Diet";
+                recDietDesc.innerText = "Low caloric density but high nutrients. Rich in fruits, veggies, and fish.";
+                // Image: Salad/Fish
+                recDietImg.src = "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1000&auto=format&fit=crop";
+
+                recWorkoutTitle.innerText = "Full Body (2 Day)";
+                recWorkoutDesc.innerText = "Focus on compound movements to burn calories efficiently without needing daily gym trips.";
+                // Image: Yoga/Bodyweight
+                recWorkoutImg.src = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1000&auto=format&fit=crop";
+                break;
+
+            case 'general_health':
+                // GENERAL HEALTH: Paleo + Upper/Lower
+                recDietTitle.innerText = "Paleo Diet";
+                recDietDesc.innerText = "Focuses on unprocessed foods like meat, fish, fruits, and nuts. Cuts out processed ingredients for better vitality.";
+                // Image: Paleo (Meat + Veggies + Nuts)
+                recDietImg.src = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1000&auto=format&fit=crop";
+
+                recWorkoutTitle.innerText = "Upper / Lower (4 Day)";
+                recWorkoutDesc.innerText = "The perfect balance of intensity and recovery. Great for sustaining long-term health.";
+                // Image: Treadmill/Cardio
+                recWorkoutImg.src = "https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=1000&auto=format&fit=crop";
+                break;
+        }
+
+        welcomeText.innerText = `Welcome back! Your current weight is ${data.weight} lbs. (Last updated: ${data.timestamp})`;
+        form.querySelector('button[type="submit"]').innerText = 'Update My Plan';
     };
 
-    // Handle form submission
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const goal = document.getElementById('goal').value;
@@ -66,23 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (goal && weight) {
             saveProgress(goal, weight);
-            alert('Your progress has been saved!');
         } else {
             alert('Please select a goal and enter your weight.');
         }
     });
 
-    // Handle clearing data
     clearDataButton.addEventListener('click', () => {
         localStorage.removeItem('fitnessTrackerData');
-        alert('Your saved data has been cleared.');
-        // Reset the form and message display
         form.reset();
-        displayWelcomeMessage(null);
+        planResult.classList.add('d-none');
+        form.querySelector('button[type="submit"]').innerText = 'GENERATE MY PLAN';
     });
 
-    // Load and display data on page load
     const initialData = loadProgress();
-    displayWelcomeMessage(initialData);
-
+    displayPersonalizedPlan(initialData);
 });
