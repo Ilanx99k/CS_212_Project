@@ -1,6 +1,4 @@
-/* style.css - Clean, Modern, and Highly Readable */
-
-/* Define custom colors and font for consistency */
+/* style.css */
 :root {
     --accent-color: #00796B; /* Dark Teal */
     --text-color: #333;
@@ -13,14 +11,13 @@
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-color);
-    /* Light background */
     background-color: white; 
     scroll-behavior: smooth; 
     padding-top: 56px; 
 }
 
 /* Typography Overrides */
-h1, h2, h3 {
+h1, h2, h3, h4, h5 {
     color: #212529;
 }
 
@@ -28,12 +25,15 @@ h1, h2, h3 {
     color: var(--accent-color) !important;
 }
 
+.bg-accent {
+    background-color: var(--accent-color) !important;
+}
+
 .bg-light-gray {
     background-color: var(--light-gray);
 }
 
-
-/* Navbar Customization (Light Background) */
+/* Navbar Customization */
 .navbar-light .navbar-nav .nav-link {
     color: var(--text-color);
     font-weight: 500;
@@ -45,50 +45,52 @@ h1, h2, h3 {
 }
 
 
-/* Hero Section - Simple and Bold */
+/* Hero Section */
 .hero {
-    /* Simple color block hero for a minimalist look */
     background-color: var(--light-gray); 
     padding-top: 5rem;
     padding-bottom: 5rem;
     margin-top: -56px; 
 }
 
-/* Accent Button Style */
+/* Button Styles */
 .btn-accent {
     background-color: var(--accent-color);
     border-color: var(--accent-color);
     color: white;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
 }
 
 .btn-accent:hover {
-    background-color: #004d40; /* Darker teal on hover */
+    background-color: #004d40; 
     border-color: #004d40;
     color: white;
+    transform: translateY(-2px);
 }
 
-/* Custom button styles for the tracker section */
 .btn-success-custom {
     background-color: var(--success-color);
     border-color: var(--success-color);
     color: white;
 }
-.btn-success-custom:hover {
-    background-color: #1e7e34;
-    border-color: #1e7e34;
-}
 
 .text-danger-custom {
     color: var(--danger-color) !important;
 }
-
 .text-danger-custom:hover {
-    color: #a71d2a !important;
+    text-decoration: underline;
 }
 
 
-/* Card Borders with Accent Color */
+/* Card Styles */
+.card {
+    border-radius: 12px; /* Softer corners */
+}
+
+.card-header {
+    border-bottom: none;
+}
+
 .card.border-teal {
     border: 1px solid var(--accent-color) !important;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -97,6 +99,31 @@ h1, h2, h3 {
 .card.border-teal:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* --- Homepage Image Cards --- */
+.card-image-diet {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=2053&auto=format&fit=crop') center/cover no-repeat;
+    color: white !important;
+    transition: transform 0.3s ease;
+    border: none !important;
+}
+
+.card-image-exercise {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    color: white !important;
+    transition: transform 0.3s ease;
+    border: none !important;
+}
+
+.card-image-diet:hover, .card-image-exercise:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.card-image-diet h3, .card-image-exercise h3 {
+    color: white;
+    font-weight: bold;
 }
 
 /* Footer Section */
